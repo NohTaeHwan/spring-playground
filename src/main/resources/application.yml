@@ -1,0 +1,11 @@
+
+server:
+  port: 8082
+  tomcat:
+    max-http-form-post-size: 1024MB
+    max-swallow-size: 1024MB
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
