@@ -44,8 +44,7 @@ public class AsyncConfig  {
         executor.setCorePoolSize(1);
         executor.setQueueCapacity(1);
         executor.setMaxPoolSize(1);
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
-        //executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;
     }
 

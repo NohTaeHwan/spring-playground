@@ -26,6 +26,9 @@ public class AsyncService {
 
     @Async("lackThreadPool")
     public void lackThreadPoolReceiver(){
+        log.info("[lackThreadPoolReceiver()]");
+        log.info("::::::Thread Name : " + Thread.currentThread().getName());
+
 
     }
 

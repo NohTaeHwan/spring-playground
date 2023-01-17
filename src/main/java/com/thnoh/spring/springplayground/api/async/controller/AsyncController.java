@@ -15,7 +15,7 @@ public class AsyncController {
     private final CallerService callerService;
 
     @GetMapping("/{type}")
-    public String callAsync(@PathVariable("type") Integer type) throws Exception{
+    public String callAsync(@PathVariable("type") Integer type){
 
         if(type == 0){
             callerService.callAsync();
@@ -25,6 +25,12 @@ public class AsyncController {
             callerService.callInnerAsync();
         }
 
+        return "ok";
+    }
+
+    @GetMapping("/lack")
+    public String callLackAsync(){
+        callerService.callLackAsync();
         return "ok";
     }
 

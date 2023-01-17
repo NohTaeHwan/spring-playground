@@ -38,6 +38,16 @@ public class CallerService {
         this.innerAsyncReceiver2();
     }
 
+    public void callLackAsync(){
+        log.info("[callInnerAsync()]");
+        log.info("::::::Thread Name : " + Thread.currentThread().getName());
+
+        for(int i=0;i<25;i++){
+            asyncService.lackThreadPoolReceiver();
+        }
+
+    }
+
     @Async("taskExecutor1")
     public void innerAsyncReceiver1(){
         log.info("[innerAsyncReceiver1()]");
