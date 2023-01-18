@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Service
@@ -38,14 +42,19 @@ public class CallerService {
         this.innerAsyncReceiver2();
     }
 
-    public void callLackAsync(){
+    public Integer callLackAsync() throws Exception {
         log.info("[callInnerAsync()]");
         log.info("::::::Thread Name : " + Thread.currentThread().getName());
 
+        int count = 0;
         for(int i=0;i<25;i++){
             asyncService.lackThreadPoolReceiver();
+            count++;
         }
 
+        System.out.println("::::::::: [result count] " + count);
+
+        return count;
     }
 
     @Async("taskExecutor1")

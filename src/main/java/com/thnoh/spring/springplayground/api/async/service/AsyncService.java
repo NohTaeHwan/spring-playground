@@ -2,7 +2,11 @@ package com.thnoh.spring.springplayground.api.async.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -25,11 +29,12 @@ public class AsyncService {
     }
 
     @Async("lackThreadPool")
-    public void lackThreadPoolReceiver(){
+    public ListenableFuture<Integer> lackThreadPoolReceiver() throws InterruptedException {
         log.info("[lackThreadPoolReceiver()]");
         log.info("::::::Thread Name : " + Thread.currentThread().getName());
-
-
+        Thread.sleep(1000);
+        int resultCode = 1;
+        return new AsyncResult<>(resultCode);
     }
 
 
