@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Service
@@ -18,7 +15,7 @@ public class CallerService {
 
     /* 정상적으로 Async 호출 */
     public void callAsync(){
-        log.info("[callAsync()]");
+        log.info("[Async 빈 호출]");
         log.info("::::::Thread Name : " + Thread.currentThread().getName());
 
         asyncService.asyncReceiver1();
@@ -27,23 +24,23 @@ public class CallerService {
 
     /* Async 메소드를 담은 Bean 생성해서 호출 */
     public void callAsyncWithConstructor(){
-        AsyncService asyncService1 = new AsyncService();
-        log.info("[callAsyncWithConstructor()]");
+        AsyncService asyncServiceWithConstructor = new AsyncService();
+        log.info("[Async 빈 생성해서 호출]");
         log.info("::::::Thread Name : " + Thread.currentThread().getName());
-        asyncService1.asyncReceiver1();
-        asyncService1.asyncReceiver2();
+        asyncServiceWithConstructor.asyncReceiver1();
+        asyncServiceWithConstructor.asyncReceiver2();
     }
 
     /* 같은 클래스에 있는 async 메소드 호출 */
     public void callInnerAsync(){
-        log.info("[callInnerAsync()]");
+        log.info("[같은 클래스 내의 Async 메소드 호출]");
         log.info("::::::Thread Name : " + Thread.currentThread().getName());
         this.innerAsyncReceiver1();
         this.innerAsyncReceiver2();
     }
 
     public Integer callLackAsync() throws Exception {
-        log.info("[callInnerAsync()]");
+        log.info("[callLackAsync()]");
         log.info("::::::Thread Name : " + Thread.currentThread().getName());
 
         int count = 0;
