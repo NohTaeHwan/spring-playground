@@ -15,9 +15,7 @@ public class CallerService {
 
     /* 정상적으로 Async 호출 */
     public void callAsync(){
-        log.info("[Async 빈 호출]");
-        log.info("::::::Thread Name : " + Thread.currentThread().getName());
-
+        log.info("[Async Method 정상호출]");
         asyncService.asyncReceiver1();
         asyncService.asyncReceiver2();
     }
@@ -25,16 +23,14 @@ public class CallerService {
     /* Async 메소드를 담은 Bean 생성해서 호출 */
     public void callAsyncWithConstructor(){
         AsyncService asyncServiceWithConstructor = new AsyncService();
-        log.info("[Async 빈 생성해서 호출]");
-        log.info("::::::Thread Name : " + Thread.currentThread().getName());
+        log.info("[생성자를 통한 Async 메소드 호출]");
         asyncServiceWithConstructor.asyncReceiver1();
         asyncServiceWithConstructor.asyncReceiver2();
     }
 
     /* 같은 클래스에 있는 async 메소드 호출 */
     public void callInnerAsync(){
-        log.info("[같은 클래스 내의 Async 메소드 호출]");
-        log.info("::::::Thread Name : " + Thread.currentThread().getName());
+        log.info("[내부 클래스의 Async 메소드 호출]");
         this.innerAsyncReceiver1();
         this.innerAsyncReceiver2();
     }
