@@ -26,6 +26,8 @@ public class RedisController {
 
     private final RedisTemplate<String,RedisModel> redisTemplate;
 
+    private final RedisTemplate<String,Long> arcadeTemplate;
+
     @GetMapping("")
     public String ok(){
         return "ok";
@@ -105,7 +107,22 @@ public class RedisController {
             log.info("당신의 대기열에서 순위는? ={}",rank);
         });
 
+    }
 
+    @GetMapping("/save2")
+    public void saveId(){
+        ZSetOperations<String,Long> zSetOperations = arcadeTemplate.opsForZSet();
+        zSetOperations.add("idQueue",generateRandomId(),System.currentTimeMillis());
+
+    }
+
+    @GetMapping("/count")
+    public void getIdCount(){
+        ZSetOperations<String,Long> zSetOperations = arcadeTemplate.opsForZSet();
+        Long count = zSetOperations.count("idQueue",0,100);
+
+        zSetOperations.add("idQueue",generateRandomId(),System.currentTimeMillis());
+        log.info("count : ={}",count);
     }
 
     private Long generateRandomId(){
