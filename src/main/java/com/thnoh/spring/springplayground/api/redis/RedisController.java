@@ -30,8 +30,36 @@ public class RedisController {
 
     @GetMapping("")
     public String ok(){
+
+        new MyThread().start();
+
         return "ok";
     }
+
+    private class MyThread extends Thread{
+        int number;
+        public MyThread(){
+            this.number = 0;
+        }
+        @Override
+        public void run() {
+            try {
+                for (int i=0;i<10;i++){
+                    log.info("current number ={}",this.number);
+                    Thread.sleep(1000);
+                    this.number++;
+
+                    if(this.number == 10){
+                        return;
+                    }
+                }
+
+            }catch (InterruptedException e){
+                log.info("interrupted!");
+            }
+        }
+    }
+
 
     @GetMapping("/save")
     public String save(){
